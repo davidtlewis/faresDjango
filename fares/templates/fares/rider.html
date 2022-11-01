@@ -1,0 +1,36 @@
+{% extends "fares/layout.html" %}
+{% load static %}
+
+{% comment %} {% block script %}
+    <script src="{% static 'network/network.js' %}"></script>
+{% endblock %} {% endcomment %}
+
+{% block body %}
+
+<h2>Rider {{rider.name}}</h2>
+
+<h2>Rules & PRoducts:</h2>
+<table id="rider_rules">
+                <tr>
+                    <th>id</th>
+                    <th>network</th>
+                    <th>from_area</th>
+                    <th>to area</th>
+                    <th>fare_container</th>
+                    <th>product name</th>
+                    <th>product amount</th>
+                </th>
+                {% for leg_rule in leg_rules%}
+                    <tr>
+                        <td>{{leg_rule.id}}</td>
+                        <td>{{leg_rule.network}} </td>
+                        <td> {{leg_rule.from_area}} </td>
+                        <td>{{leg_rule.to_area}}</td>
+                        <td>{{leg_rule.fare_container}}</td>
+                        <td>{{leg_rule.product.name}}</td>
+                        <td>{{leg_rule.product.amount}}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+
+{% endblock %}
