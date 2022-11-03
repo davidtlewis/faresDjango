@@ -1,6 +1,6 @@
 from django.db import models
 # from django.conf import settings
-
+# we are branching this
 
 class Product(models.Model):
     ref_id = models.CharField(max_length=128, )
