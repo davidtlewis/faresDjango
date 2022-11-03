@@ -1,15 +1,33 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.fields import Field
+from import_export.admin import ImportExportModelAdmin
 
 from .models import *
 
 # class LegInLineAdmin(admin.TabularInline):
 #     model = Leg_Rule
 
-class LegRuleAdmin(admin.ModelAdmin):
+class LegRuleResource(resources.ModelResource):
+    network = Field(attribute='network__ref_id', column_name='network')
+    from_area = Field(attribute='from_area__ref_id', column_name='from_area')
+    to_area = Field(attribute='to_area__ref_id', column_name='to_area')
+    product = Field(attribute='product__ref_id', column_name='product')
+    leg_group = Field(attribute='leg_group__ref_id', column_name='leg_group')
+    rider_category = Field(attribute='rider_category__ref_id', column_name='rider_category')
+    fare_container = Field(attribute='fare_container__ref_id', column_name='fare_container')
+    class Meta:
+        model = Leg_Rule
+        exclude = ('id', )
+    # Think anout using natural keys !
+    # https://docs.djangoproject.com/en/4.1/topics/serialization/#:~:text=A%20natural%20key%20is%20a,using%20the%20primary%20key%20value.
+
+class LegRuleAdmin(ImportExportModelAdmin):
     save_as = True
     list_display = ("id", "network", "from_area","to_area", "rider_category","fare_container", "product", "leg_group")
     list_editable = ("network", "from_area","to_area", "rider_category","fare_container", "product", "leg_group")
     list_filter = ("network","rider_category","fare_container",)
+    resource_classes = [LegRuleResource]
 
 class ProductAdmin(admin.ModelAdmin):
     save_as = True
@@ -57,3 +75,4 @@ admin.site.register(Rider_Category, RiderAdmin)
 admin.site.register(Fare_Container, ContainerAdmin)
 admin.site.register(Network, NetworkAdmin)
 admin.site.register(Area, AreaAdmin)
+
