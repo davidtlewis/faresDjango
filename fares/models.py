@@ -57,6 +57,7 @@ class Transfer_Rule(models.Model):
     notes = models.CharField(max_length=256, null=True, blank=True)
 
 class Rider_Category(models.Model):
+    # we are going to make this a primary key !
     ref_id =  models.CharField(max_length=128, blank=False, )
     name = models.CharField(max_length=128)
     min_age = models.PositiveIntegerField(null=True, blank=True)
