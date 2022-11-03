@@ -1,6 +1,6 @@
-from curses import ALL_MOUSE_EVENTS
-from email.policy import default
 from django.db import models
+# from django.conf import settings
+
 
 class Product(models.Model):
     ref_id = models.CharField(max_length=128, )
