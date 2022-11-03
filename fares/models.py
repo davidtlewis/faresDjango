@@ -10,6 +10,8 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    
+
 class Leg_Rule(models.Model):
     network = models.ForeignKey('Network', on_delete=models.CASCADE, )
     from_area = models.ForeignKey('Area', on_delete=models.CASCADE, related_name='area_to',null=True, blank=True)
@@ -20,7 +22,7 @@ class Leg_Rule(models.Model):
     fare_container = models.ForeignKey('Fare_Container', on_delete=models.CASCADE,null=True, blank=True )
 
 class Leg_Group(models.Model):
-    ref_id =  models.CharField(max_length=128, blank=False, default="set me")
+    ref_id =  models.CharField(max_length=128, blank=False, )
     def __str__(self):
         return self.ref_id
 
