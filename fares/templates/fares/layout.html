@@ -1,10 +1,12 @@
 {% load static %}
+{% load bootstrap3 %}
 {% load render_table from django_tables2 %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>{% block title %}Fares{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">
         {% block script %}
         {% endblock %}
@@ -26,6 +28,15 @@
                                 <li class="nav-item">
                                 <a class="nav-link" href="{% url 'index' %}">All Posts</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'transfer_list' %}">Transfers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'legrule_list' %}">Leg rules</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'legrule_filtered_list' %}">Leg Rules (filtered)</a>
+                                            </li>
                                 {% comment %} {% if user.is_authenticated %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'following' %}">Following</a>

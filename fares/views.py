@@ -6,8 +6,8 @@ from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 
 
-from fares.models import Leg_Rule, Rider_Category
-from fares.tables import LegRuleTable
+from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
+from fares.tables import LegRuleTable, TransferTable
 from fares.filters import LegRuleFilter
 
 
@@ -34,6 +34,12 @@ class LegRuleListView(SingleTableView):
     #  def get_queryset(self):
     #     queryset = super(PostListView, self).get_queryset()
     #     return queryset.filter(author.username=self.request.user.username)
+
+
+class TransferListView(SingleTableView):
+    model = Transfer_Rule
+    template_name = 'fares/transferlist.html'
+    table_class = TransferTable
 
 class LegRuleListFilteredView(SingleTableMixin, FilterView):
     model = Leg_Rule
