@@ -7,7 +7,7 @@ from django_tables2.views import SingleTableMixin
 
 
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
-from fares.tables import LegRuleTable, TransferTable
+from fares.tables import *
 from fares.filters import LegRuleFilter
 
 
@@ -47,3 +47,22 @@ class LegRuleListFilteredView(SingleTableMixin, FilterView):
     filterset_class = LegRuleFilter
     template_name = 'fares/legrulefilteredlist.html'
     
+class RiderListView(SingleTableView):
+    model = Rider_Category
+    template_name = 'fares/riderlist.html'
+    table_class = RiderTable
+
+class NetworkListView(SingleTableView):
+    model = Network
+    template_name = 'fares/networklist.html'
+    table_class = NetworkTable
+
+class ProductListView(SingleTableView):
+    model = Product
+    template_name = 'fares/productlist.html'
+    table_class = ProductTable
+
+class AreaListView(SingleTableView):
+    model = Area
+    template_name = 'fares/arealist.html'
+    table_class = AreaTable
