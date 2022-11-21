@@ -37,3 +37,9 @@ class AreaTable(tables.Table):
         model = Area
         template_name = "django_tables2/bootstrap.html"
 
+class FareContainerTable(tables.Table):
+    class Meta:
+        model = Fare_Container
+        template_name = "django_tables2/bootstrap.html"
+        
+            

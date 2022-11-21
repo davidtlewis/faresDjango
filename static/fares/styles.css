@@ -1,0 +1,60 @@
+body {
+    padding-left: 60px;
+  }
+
+.post {
+    margin: 3px;
+    border: 1px solid gray;
+    padding: 3px;
+}
+
+#newpostform {
+    margin: 2px;
+    
+    padding: 3px;
+}
+
+ .likecount {
+     display: inline;
+ }
+
+ .mainbody {
+     margin: 10px;
+ }
+
+ .posteditcontainer {
+    display:none;
+}
+
+[data-show="show"] { 
+    display: inline;
+    }
+
+[data-show="hide"] { 
+        display: none;
+    }
+
+.dynamicheart, .staticheart {
+    display: inline;
+    }
+
+#profileheader > h3 {
+    display: inline-block; 
+}
+
+#profileheader > span {
+    display: inline-block;
+    margin-left: 20px; 
+}
+
+#profileheader > form {
+    display: inline-block;
+    margin-left: 20px; 
+}
+#newpostform > textarea {
+    margin-bottom: 4px;
+}
+
+
+
+

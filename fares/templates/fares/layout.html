@@ -13,8 +13,8 @@
     <body>
         <div container>
             <div class="row">
-                <div class="col"></div>
-                <div class="col-lg-8">
+                {% comment %} <div class="col"></div> {% endcomment %}
+                <div class="col">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <a class="navbar-brand" href="#">Fares</a>
                         <div>
@@ -34,7 +34,7 @@
                                     <a class="nav-link" href="{% url 'legrule_filtered_list' %}">Leg Rules (filtered)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'rider_list' %}">rider Categories</a>
+                                    <a class="nav-link" href="{% url 'rider_list' %}">Rider Categories</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'network_list' %}">Networks</a>
@@ -43,7 +43,7 @@
                                     <a class="nav-link" href="{% url 'product_list' %}">Products</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'legrule_filtered_list' %}">Leg Rules (filtered)</a>
+                                    <a class="nav-link" href="{% url 'fareconatiner_list' %}">Fare Containers</a>
                                 </li>
                             </ul>
                         </div>
@@ -54,7 +54,7 @@
                         {% endblock %}
                     </div>
                 </div>
-                <div class="col"></div>
+                {% comment %} <div class="col"></div> {% endcomment %}
             </div>
         </div>
     </body>
