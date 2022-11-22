@@ -9,16 +9,17 @@ from .models import *
 #     model = Leg_Rule
 
 class LegRuleResource(resources.ModelResource):
-    network = Field(attribute='network__ref_id', column_name='network')
-    from_area = Field(attribute='from_area__ref_id', column_name='from_area')
-    to_area = Field(attribute='to_area__ref_id', column_name='to_area')
-    product = Field(attribute='product__ref_id', column_name='product')
-    leg_group = Field(attribute='leg_group__ref_id', column_name='leg_group')
-    rider_category = Field(attribute='rider_category__ref_id', column_name='rider_category')
-    fare_container = Field(attribute='fare_container__ref_id', column_name='fare_container')
+    network_id = Field(attribute='network__ref_id', column_name='network_id')
+    from_area_id = Field(attribute='from_area__ref_id', column_name='from_area_id')
+    to_area_id = Field(attribute='to_area__ref_id', column_name='to_area_id')
+    fare_product_id = Field(attribute='product__ref_id', column_name='fare_product_id')
+    leg_group_id = Field(attribute='leg_group__ref_id', column_name='leg_group_id')
+    rider_category_id = Field(attribute='rider_category__ref_id', column_name='rider_category_id')
+    fare_container_id = Field(attribute='fare_container__ref_id', column_name='fare_container_id')
     class Meta:
         model = Leg_Rule
-        exclude = ('id', )
+        exclude = ('id', 'from_area','to_area','network','product','rider_category','leg_group','fare_container')
+        import_id_fields = ('from_area_id','to_area_id','rider_category_id','fare_container_id')
 
 class LegRuleAdmin(ImportExportModelAdmin):
     save_as = True
@@ -33,6 +34,7 @@ class ProductResource(resources.ModelResource):
     class Meta:
         model = Product
         exclude = ('id', 'ref_id','name')
+    
 
 class ProductAdmin(ImportExportModelAdmin):
     save_as = True
