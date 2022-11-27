@@ -78,44 +78,86 @@ class FareContainerListView(SingleTableView):
 def upload_csv(request):
     data = {}
     if "GET" == request.method:
-        return render(request, "fares/upload.html", data)
+        return render(request, "fares/uploadlegrules.html", data)
     # if not GET, then proceed
     csv_file = request.FILES["csv_file"]
     
     #if file is too large, return
     if csv_file.multiple_chunks():
         messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
-        return HttpResponseRedirect(reverse("upload"))
+        return HttpResponseRedirect(reverse("uploadlegrules"))
 
     decoded_file = csv_file.read().decode('utf-8').splitlines()
     file_data = csv.DictReader(decoded_file, )
-
+    row_counter = 0
+    erroredRows = 0
+    createdObjects = 0
+    resultsMessage = ''
     for row in file_data:
         # create a fare_lef_rule for each row - as long as all referenced objects exists
-        print(row)
+        row_counter+=1
+        # print(row)
+        
         network = Network.objects.filter(ref_id=row['network_id']).first()
         from_area = Area.objects.filter(ref_id=row['from_area_id']).first()
         to_area = Area.objects.filter(ref_id=row['to_area_id']).first()
         product = Product.objects.filter(ref_id=row['fare_product_id']).first()
-        leg_group = Leg_Group.objects.filter(ref_id=row['leg_group_id']).first()
         rider_category = Rider_Category.objects.filter(ref_id=row['rider_category_id']).first()
         fare_container = Fare_Container.objects.filter(ref_id=row['fare_container_id']).first()
-        # TODO check if there was a key that it matched!
-        # validation = True
-        # if network is None:
-        #     validation = False
-        #     errorMessage = f"Row: number network: {row['network']} not found./n"
-        lg = Leg_Rule(
-            network=network,
-            from_area=from_area, 
-            to_area=to_area, 
-            product=product,
-            leg_group=leg_group,
-            rider_category=rider_category,
-            fare_container=fare_container,
-        )
-        lg.save()
-        print(lg)
+        if row['leg_group_id'] != '':
+            leg_group, created = Leg_Group.objects.get_or_create(ref_id=row['leg_group_id'])
+        else:
+            leg_group = None
 
-    
-    return HttpResponseRedirect(reverse("upload"))
+        rowValid = True
+        resultsMessage += f"Row: {row_counter} "
+        # check all references worked - record error message if not
+        if (row['network_id'] != '') and (network is None) :
+            rowValid = False
+            resultsMessage += f"fare_product: {row['network_id']} not found. "
+
+        if (row['from_area_id'] != '') and (from_area is None) :
+            rowValid = False
+            resultsMessage += f"fare_product: {row['from_area_id']} not found. "
+
+        if (row['to_area_id'] != '') and (to_area is None) :
+            rowValid = False
+            resultsMessage += f"fare_product: {row['to_area_id']} not found. "
+        
+        if (row['fare_product_id'] != '') and (product is None) :
+            rowValid = False
+            resultsMessage += f"fare_product: {row['fare_product_id']} not found. "
+
+        if (row['rider_category_id'] != '') and (rider_category is None) :
+            rowValid = False
+            resultsMessage += f"rider_category: {row['rider_category_id']} not found. "
+
+        if (row['fare_container_id'] != '') and (fare_container is None) :
+            rowValid = False
+            resultsMessage += f"fare_container: {row['fare_container_id']} not found."
+        
+        if rowValid == False:
+            erroredRows+=1
+            #close out the message string
+            resultsMessage+='\n'
+        else:
+            #create the leg rule object
+            lg = Leg_Rule(
+                network=network,
+                from_area=from_area, 
+                to_area=to_area, 
+                product=product,
+                leg_group=leg_group,
+                rider_category=rider_category,
+                fare_container=fare_container,
+            )
+            lg.save()
+            createdObjects+=1
+            resultsMessage += "Leg Rule created.\n"
+        
+    print(resultsMessage)
+    print(f'created {createdObjects} objects')
+    print(f'Errored Rows {erroredRows}')
+
+        #TODO fix up response to provide the error and status message via a message in context
+    return HttpResponseRedirect(reverse("uploadlegrules"))

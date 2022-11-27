@@ -14,5 +14,5 @@ urlpatterns = [
     path("networklist", NetworkListView.as_view(), name='network_list'),
     path("productlist", ProductListView.as_view(), name='product_list'),
     path("farecontainerlist", FareContainerListView.as_view(), name='fareconatiner_list'),
-    path('upload', views.upload_csv, name='upload'),
+    path('uploadlegrules', views.upload_csv, name='uploadlegrules'),
 ]
