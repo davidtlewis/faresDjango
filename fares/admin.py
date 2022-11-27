@@ -20,6 +20,90 @@ class LegRuleResource(resources.ModelResource):
         model = Leg_Rule
         exclude = ('id', 'from_area','to_area','network','product','rider_category','leg_group','fare_container')
         import_id_fields = ('from_area_id','to_area_id','rider_category_id','fare_container_id')
+    
+    # def before_import_row(self, row, row_number=None, **kwargs):
+    #     network_id = row.get('network_id')
+    #     if network_id == None:
+    #         network_id = "EMPTY"
+    #     row["network_id"] = Network.objects.get(ref_id=network_id)
+    #     print( row["network_id"])
+        
+    #     from_area_id = row.get('from_area_id')
+    #     if from_area_id == None:
+    #         from_area_id = "EMPTY"
+    #     row["from_area_id"] = Area.objects.get(ref_id=from_area_id)
+    #     print( row["from_area_id"])
+    #     to_area_id = row.get('to_area_id')
+    #     if to_area_id == '':
+    #         to_area_id = "EMPTY"
+    #     row['to_area_id'] = Area.objects.get(ref_id=to_area_id)
+    #     print( row["to_area_id"])
+        
+    #     rider_category_id = row.get('rider_category_id')
+    #     if rider_category_id == None:
+    #         rider_category_id = "EMPTY"
+    #     row['rider_category_id'] = Rider_Category.objects.get(ref_id=rider_category_id)
+    #     print( row["rider_category_id"])
+        
+    #     fare_container_id = row.get('fare_container_id')
+    #     if fare_container_id == None:
+    #         fare_container_id = "EMPTY"
+    #     row['fare_container_id'] = Fare_Container.objects.get(ref_id=fare_container_id)
+    #     print( row["fare_container_id"])
+        
+    #     fare_product_id = row.get('fare_product_id')
+    #     if fare_product_id == None:
+    #         fare_product_id = "EMPTY"
+    #     row['fare_product_id'] = Product.objects.get(ref_id=fare_product_id)
+    #     print(row['fare_product_id'])
+    
+    #     leg_group_id = row.get('leg_group_id')
+    #     if leg_group_id == None:
+    #         leg_group_id = "EMPTY"
+    #     row['leg_group_id'] = Leg_Group.objects.get(ref_id=leg_group_id)
+    #     print(row['leg_group_id'])
+
+    def before_import_row(self, row, row_number=None, **kwargs):
+        network_id = row.get('network_id')
+        if network_id == '':
+            network_id = "EMPTY"
+        row["network_id"] = network_id
+        print( row["network_id"])
+        
+        from_area_id = row.get('from_area_id')
+        if from_area_id == '':
+            from_area_id = "EMPTY"
+        row["from_area_id"] = from_area_id
+        print( row["from_area_id"])
+        
+        to_area_id = row.get('to_area_id')
+        if to_area_id == '':
+            to_area_id = "EMPTY"
+        row['to_area_id'] = to_area_id
+        print( row["to_area_id"])
+        
+        rider_category_id = row.get('rider_category_id')
+        if rider_category_id == '':
+            rider_category_id = "EMPTY"
+        row['rider_category_id'] = rider_category_id
+        print( row["rider_category_id"])
+        
+        fare_container_id = row.get('fare_container_id')
+        if fare_container_id == '':
+            fare_container_id = "EMPTY"
+        row['fare_container_id'] = fare_container_id
+        print( row["fare_container_id"])
+        
+        fare_product_id = row.get('fare_product_id')
+        if fare_product_id == '':
+            fare_product_id = "EMPTY"
+        row['fare_product_id'] = fare_product_id
+        print(row['fare_product_id'])
+    
+        leg_group_id = row.get('leg_group_id')
+        if leg_group_id == '':
+            leg_group_id = "EMPTY"
+        row['leg_group_id'] = ref_id=leg_group_id
 
 class LegRuleAdmin(ImportExportModelAdmin):
     save_as = True
@@ -29,11 +113,12 @@ class LegRuleAdmin(ImportExportModelAdmin):
     resource_classes = [LegRuleResource]
 
 class ProductResource(resources.ModelResource):
-    fare_product_id = Field(attribute='ref_id', column_name='fare_product_id')
-    fare_product_name = Field(attribute='name', column_name='fare_product_name')
+    ref_id = Field(attribute='ref_id', column_name='fare_product_id')
+    name = Field(attribute='name', column_name='fare_product_name')
     class Meta:
         model = Product
         exclude = ('id', 'ref_id','name')
+        import_id_fields = ('ref_id',)
     
 
 class ProductAdmin(ImportExportModelAdmin):
@@ -48,11 +133,12 @@ class ProductAdmin(ImportExportModelAdmin):
 
 
 class RiderResource(resources.ModelResource):
-    rider_category_id = Field(attribute='ref_id', column_name='rider_category_id')
-    rider_category_name = Field(attribute='name', column_name='rider_category_name')
+    ref_id = Field(attribute='ref_id', column_name='rider_category_id')
+    name = Field(attribute='name', column_name='rider_category_name')
     class Meta:
         model = Rider_Category
         exclude = ('id', 'ref_id','name')
+        import_id_fields = ('ref_id',)
 
 class RiderAdmin(ImportExportModelAdmin):
     list_display = ("id", "ref_id", "name", "min_age", "max_age", "eligibility_url","notes",)
@@ -66,6 +152,7 @@ class TransferRuleResource(resources.ModelResource):
     class Meta:
         model = Transfer_Rule
         exclude = ('id', 'ref_id','name','from_leg_group','to_leg_group','fare_product')
+        import_id_fields = ('from_leg_group_id','to_leg_group_id')
 
 class TransferRuleAdmin(ImportExportModelAdmin):
     save_as = True
@@ -74,14 +161,20 @@ class TransferRuleAdmin(ImportExportModelAdmin):
     resource_classes = [TransferRuleResource,]
 
 class FareContainerResource(resources.ModelResource):
-    fare_container_id = Field(attribute='ref_id', column_name='fare_container_id')
-    fare_container_name = Field(attribute='name', column_name='fare_container_name')
-    rider_category_id = Field(attribute='rider_category__ref_id', column_name='rider_category_id')
+    ref_id = Field(attribute='ref_id', column_name='fare_container_id')
+    name = Field(attribute='name', column_name='fare_container_name')
+    rider_category__ref_id = Field(attribute='rider_category__ref_id', column_name='rider_category_id')
     class Meta:
         model = Fare_Container
         exclude = ('id', 'ref_id','name','rider_category')
+        import_id_fields = ('ref_id')
 
-
+    def before_import_row(self, row, row_number=None, **kwargs):
+        rider_category_id = row.get('rider_category__ref_id')
+        # if rider_category_id == '':
+        #     rider_category_id = "EMPTY"
+        row["rider_category__ref_id"] = Rider_Category.objects.get(ref_id=rider_category_id)
+        print( row["rider_category_id"])
 
 
 
