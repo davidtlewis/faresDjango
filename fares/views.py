@@ -5,6 +5,9 @@ from django_tables2 import SingleTableView
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 import csv
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
@@ -78,15 +81,41 @@ def upload_csv(request):
         return render(request, "fares/upload.html", data)
     # if not GET, then proceed
     csv_file = request.FILES["csv_file"]
-
+    
     #if file is too large, return
     if csv_file.multiple_chunks():
         messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
         return HttpResponseRedirect(reverse("upload"))
 
-    file_data = csv.DictReader(csv_file)
+    decoded_file = csv_file.read().decode('utf-8').splitlines()
+    file_data = csv.DictReader(decoded_file, )
 
-    for line in file_data:
-        print(line)
+    for row in file_data:
+        # create a fare_lef_rule for each row - as long as all referenced objects exists
+        print(row)
+        network = Network.objects.filter(ref_id=row['network_id']).first()
+        from_area = Area.objects.filter(ref_id=row['from_area_id']).first()
+        to_area = Area.objects.filter(ref_id=row['to_area_id']).first()
+        product = Product.objects.filter(ref_id=row['fare_product_id']).first()
+        leg_group = Leg_Group.objects.filter(ref_id=row['leg_group_id']).first()
+        rider_category = Rider_Category.objects.filter(ref_id=row['rider_category_id']).first()
+        fare_container = Fare_Container.objects.filter(ref_id=row['fare_container_id']).first()
+        # TODO check if there was a key that it matched!
+        # validation = True
+        # if network is None:
+        #     validation = False
+        #     errorMessage = f"Row: number network: {row['network']} not found./n"
+        lg = Leg_Rule(
+            network=network,
+            from_area=from_area, 
+            to_area=to_area, 
+            product=product,
+            leg_group=leg_group,
+            rider_category=rider_category,
+            fare_container=fare_container,
+        )
+        lg.save()
+        print(lg)
 
-    return HttpResponseRedirect(reverse("myapp:upload_csv"))
+    
+    return HttpResponseRedirect(reverse("upload"))
