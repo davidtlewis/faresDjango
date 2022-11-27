@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django_tables2 import SingleTableView
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
+import csv
 
 
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
@@ -34,7 +35,6 @@ class LegRuleListView(SingleTableView):
     #  def get_queryset(self):
     #     queryset = super(PostListView, self).get_queryset()
     #     return queryset.filter(author.username=self.request.user.username)
-
 
 class TransferListView(SingleTableView):
     model = Transfer_Rule
@@ -71,3 +71,22 @@ class FareContainerListView(SingleTableView):
     model = Fare_Container
     template_name = 'fares/farecontainerlist.html'
     table_class = FareContainerTable
+
+def upload_csv(request):
+    data = {}
+    if "GET" == request.method:
+        return render(request, "fares/upload.html", data)
+    # if not GET, then proceed
+    csv_file = request.FILES["csv_file"]
+
+    #if file is too large, return
+    if csv_file.multiple_chunks():
+        messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+        return HttpResponseRedirect(reverse("upload"))
+
+    file_data = csv.DictReader(csv_file)
+
+    for line in file_data:
+        print(line)
+
+    return HttpResponseRedirect(reverse("myapp:upload_csv"))
