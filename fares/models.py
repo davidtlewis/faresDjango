@@ -19,6 +19,36 @@ class Leg_Rule(models.Model):
     rider_category = models.ForeignKey('Rider_Category', on_delete=models.CASCADE, null=True, blank=True)
     fare_container = models.ForeignKey('Fare_Container', on_delete=models.CASCADE,null=True, blank=True )
 
+
+class Stop(models.Model):
+    # stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,wheelchair_boarding,location_type,parent_station
+    stop_id = models.CharField(max_length=128, )
+    stop_name = models.CharField(max_length=128)
+    parent_station = models.ForeignKey('Stop', on_delete=models.CASCADE,null=True, blank=True)
+    
+    class LocationType(models.TextChoices):
+        STOP = '0', 'Stop'
+        STATION = '1', 'Station'
+        ENTRANCE = '2', 'Entrance or Exit'
+        GENERIC = '3', 'Generic Node'
+        BOARDINGPOINT = '4', 'Boarding Point'
+    location_type = models.CharField(
+        max_length=1,
+        choices=LocationType.choices,
+        default=LocationType.STOP,
+    )
+    
+    def __str__(self):
+        return self.stop_id
+
+class Route(models.Model):
+    route_id = models.CharField(max_length=128, )
+    route_short_name = models.CharField(max_length=128)
+    network_id  = models.ForeignKey('Network', on_delete=models.CASCADE, blank=True , null=True)
+    
+    def __str__(self):
+        return self.route_short_name
+
 class Leg_Group(models.Model):
     ref_id =  models.CharField(max_length=128, blank=False, default="set me")
     def __str__(self):
@@ -82,7 +112,11 @@ class Network(models.Model):
     def __str__(self):
         return self.ref_id
 
+
+
+
 class Area(models.Model):
+
     ref_id =  models.CharField(max_length=128, blank=False, )
     
     def __str__(self):

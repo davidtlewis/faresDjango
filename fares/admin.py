@@ -61,6 +61,22 @@ class AreaAdmin(ImportExportModelAdmin):
     list_editable = ("ref_id", ) 
     resource_classes = [AreaResource]
 
+class StopAdmin(ImportExportModelAdmin):
+    list_display = ("stop_id", "stop_name","parent_station","location_type")
+    # list_editable = ("ref_id", ) 
+    resource_classes = [StopResource]
+
+class AreaAdmin(ImportExportModelAdmin):
+    list_display = ("ref_id", )
+    # list_editable = ("ref_id", ) 
+
+
+
+class RouteAdmin(ImportExportModelAdmin):
+    list_display = ("route_id", "route_short_name","network_id")
+    # list_editable = ("ref_id", ) 
+    resource_classes = [RouteResource]
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Leg_Rule, LegRuleAdmin)
 admin.site.register(Leg_Group, LegGroupAdmin)
@@ -68,5 +84,6 @@ admin.site.register(Transfer_Rule, TransferRuleAdmin)
 admin.site.register(Rider_Category, RiderAdmin)
 admin.site.register(Fare_Container, FareContainerAdmin)
 admin.site.register(Network, NetworkAdmin)
+admin.site.register(Stop, StopAdmin)
+admin.site.register(Route, RouteAdmin)
 admin.site.register(Area, AreaAdmin)
-
