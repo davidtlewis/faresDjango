@@ -2,6 +2,7 @@ import csv
 from django.core.management import BaseCommand
 from fares.models import Leg_Rule, Rider_Category, Area, Fare_Container, Network
 
+# superceeded by working import export 
 class Command(BaseCommand):
     help = 'Load leg_rules from csv'
 

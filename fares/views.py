@@ -69,6 +69,16 @@ class AreaListView(SingleTableView):
     model = Area
     template_name = 'fares/arealist.html'
     table_class = AreaTable
+class StopListView(SingleTableView):
+    model = Stop
+    template_name = 'fares/stoplist.html'
+    table_class = StopTable
+
+class RouteListView(SingleTableView):
+    model = Route
+    template_name = 'fares/routelist.html'
+    table_class = RouteTable
+
 
 class FareContainerListView(SingleTableView):
     model = Fare_Container

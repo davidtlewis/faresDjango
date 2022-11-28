@@ -1,7 +1,8 @@
 from django.urls import path
 
 from . import views
-from fares.views import LegRuleListView, LegRuleListFilteredView, TransferListView, RiderListView, NetworkListView, ProductListView, FareContainerListView
+# from fares.views import LegRuleListView, LegRuleListFilteredView, TransferListView, RiderListView, NetworkListView, ProductListView, FareContainerListView
+from fares.views import *
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -14,5 +15,7 @@ urlpatterns = [
     path("networklist", NetworkListView.as_view(), name='network_list'),
     path("productlist", ProductListView.as_view(), name='product_list'),
     path("farecontainerlist", FareContainerListView.as_view(), name='fareconatiner_list'),
-    path('uploadlegrules', views.upload_csv, name='uploadlegrules'),
+    path('arealist', AreaListView.as_view(), name='area_list'),
+    path('stoplist', StopListView.as_view(), name='stop_list'),
+    path('routelist', RouteListView.as_view(), name='route_list'),
 ]

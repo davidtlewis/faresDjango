@@ -1,4 +1,2 @@
-load stop_areas, building areas as you go
-load routes, building networks as you go - is that right ?
-timeframes and calendars - objects and leg_rules references
-areas resources not working for import export
+1. timeframes and calendars - objects and leg_rules references
+2. areas resources not working for export (inserts the id !)

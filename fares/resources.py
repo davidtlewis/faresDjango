@@ -14,12 +14,12 @@ class LegRuleResource(resources.ModelResource):
     from_area_id = Field(
         attribute='from_area',
         column_name='from_area_id',
-        widget=ForeignKeyWidget(Area, 'ref_id'))
+        widget=ForeignKeyWidget(Area, 'area_id'))
 
     to_area_id = Field(
         attribute='to_area',
         column_name='to_area_id',
-        widget=ForeignKeyWidget(Area, 'ref_id'))
+        widget=ForeignKeyWidget(Area, 'area_id'))
 
     fare_product_id = Field(
         attribute='product',
@@ -41,97 +41,12 @@ class LegRuleResource(resources.ModelResource):
         column_name='fare_container_id',
         widget=ForeignKeyWidget(Fare_Container, 'ref_id'))
 
-    print (fare_container_id)
+    # print (fare_container_id)
 
     class Meta:
         model = Leg_Rule
         exclude = ('id', 'from_area','to_area','network','product','rider_category','leg_group','fare_container')
         import_id_fields = ('network_id','from_area_id','to_area_id','rider_category_id','fare_container_id')
-        # import_id_fields = ('from_area','to_area','rider_category','fare_container')
-    
-    # def before_import_row(self, row, row_number=None, **kwargs):
-    #     network_id = row.get('network_id')
-    #     if network_id == None:
-    #         network_id = "EMPTY"
-    #     row["network_id"] = Network.objects.get(ref_id=network_id)
-    #     print( row["network_id"])
-        
-    #     from_area_id = row.get('from_area_id')
-    #     if from_area_id == None:
-    #         from_area_id = "EMPTY"
-    #     row["from_area_id"] = Area.objects.get(ref_id=from_area_id)
-    #     print( row["from_area_id"])
-    #     to_area_id = row.get('to_area_id')
-    #     if to_area_id == '':
-    #         to_area_id = "EMPTY"
-    #     row['to_area_id'] = Area.objects.get(ref_id=to_area_id)
-    #     print( row["to_area_id"])
-        
-    #     rider_category_id = row.get('rider_category_id')
-    #     if rider_category_id == None:
-    #         rider_category_id = "EMPTY"
-    #     row['rider_category_id'] = Rider_Category.objects.get(ref_id=rider_category_id)
-    #     print( row["rider_category_id"])
-        
-    #     fare_container_id = row.get('fare_container_id')
-    #     if fare_container_id == None:
-    #         fare_container_id = "EMPTY"
-    #     row['fare_container_id'] = Fare_Container.objects.get(ref_id=fare_container_id)
-    #     print( row["fare_container_id"])
-        
-    #     fare_product_id = row.get('fare_product_id')
-    #     if fare_product_id == None:
-    #         fare_product_id = "EMPTY"
-    #     row['fare_product_id'] = Product.objects.get(ref_id=fare_product_id)
-    #     print(row['fare_product_id'])
-    
-    #     leg_group_id = row.get('leg_group_id')
-    #     if leg_group_id == None:
-    #         leg_group_id = "EMPTY"
-    #     row['leg_group_id'] = Leg_Group.objects.get(ref_id=leg_group_id)
-    #     print(row['leg_group_id'])
-
-    # def before_import_row(self, row, row_number=None, **kwargs):
-    #     network_id = row.get('network_id')
-    #     if network_id == '':
-    #         network_id = "EMPTY"
-    #     row["network_id"] = network_id
-    #     print( row["network_id"])
-        
-    #     from_area_id = row.get('from_area_id')
-    #     if from_area_id == '':
-    #         from_area_id = "EMPTY"
-    #     row["from_area_id"] = from_area_id
-    #     print( row["from_area_id"])
-        
-    #     to_area_id = row.get('to_area_id')
-    #     if to_area_id == '':
-    #         to_area_id = "EMPTY"
-    #     row['to_area_id'] = to_area_id
-    #     print( row["to_area_id"])
-        
-    #     rider_category_id = row.get('rider_category_id')
-    #     if rider_category_id == '':
-    #         rider_category_id = "EMPTY"
-    #     row['rider_category_id'] = rider_category_id
-    #     print( row["rider_category_id"])
-        
-    #     fare_container_id = row.get('fare_container_id')
-    #     if fare_container_id == '':
-    #         fare_container_id = "EMPTY"
-    #     row['fare_container_id'] = fare_container_id
-    #     print( row["fare_container_id"])
-        
-    #     fare_product_id = row.get('fare_product_id')
-    #     if fare_product_id == '':
-    #         fare_product_id = "EMPTY"
-    #     row['fare_product_id'] = fare_product_id
-    #     print(row['fare_product_id'])
-    
-    #     leg_group_id = row.get('leg_group_id')
-    #     if leg_group_id == '':
-    #         leg_group_id = "EMPTY"
-    #     row['leg_group_id'] = ref_id=leg_group_id
 
 class ProductResource(resources.ModelResource):
     ref_id = Field(attribute='ref_id', column_name='fare_product_id')
@@ -165,7 +80,6 @@ class TransferRuleResource(resources.ModelResource):
         column_name='fare_product_id',
         widget=ForeignKeyWidget(Product,'ref_id'))
     
-    
     class Meta:
         model = Transfer_Rule
         exclude = ('id', 'ref_id','name','from_leg_group','to_leg_group','fare_product')
@@ -185,11 +99,12 @@ class FareContainerResource(resources.ModelResource):
         import_id_fields = ('fare_container_id',)
 
 class AreaResource(resources.ModelResource):
-    area_id = Field(attribute='ref_id', column_name='area_id')
+    # area_id = Field(attribute='ref_id', column_name='area_id')
     
     class Meta:
         model = Area
-        exclude = ('id', 'ref_id',)
+        exclude = ('id',)
+        import_id_fields = ('area_id',)
 
 class StopResource(resources.ModelResource):
     parent_station = Field(
@@ -197,10 +112,17 @@ class StopResource(resources.ModelResource):
         column_name='parent_station',
         widget=ForeignKeyWidget(Stop,'stop_id'))
 
+    def before_import_row(self, row, row_number=None, **kwargs):
+        # we going to create any missing parent station - its attribute will be updatd by the later row
+        parent_station_id = row.get('parent_station')
+        if parent_station_id != '':
+            Stop.objects.get_or_create(stop_id=parent_station_id)
+            
     class Meta:
         model = Stop
         exclude = ('id',)
         import_id_fields = ('stop_id',)
+        use_bulk = True
 
 class RouteResource(resources.ModelResource):
     network_id = Field(
@@ -208,13 +130,30 @@ class RouteResource(resources.ModelResource):
         column_name='network_id',
         widget=ForeignKeyWidget(Network, 'ref_id'))
     
-    # def before_import_row(self, row, row_number=None, **kwargs):
-    #     network_id = row.get('network_id')
-    #     if network_id == None:
-    #         network_id = "EMPTY"
-    #     row["network_id"] = Network.objects.get(ref_id=network_id)
+    def before_import_row(self, row, row_number=None, **kwargs):
+        # we going to create any missing network
+        network_id = row.get('network_id')
+        if network_id != '':
+            Network.objects.get_or_create(ref_id=network_id)
 
     class Meta:
         model = Route
         exclude = ('id',)
         import_id_fields = ('route_id',)
+
+class StopAreaResource(resources.ModelResource):
+    stop_id = Field(
+        attribute='stop_id',
+        column_name='stop_id',
+        widget=ForeignKeyWidget(Stop,'stop_id'))
+    
+    area_id = Field(
+        attribute='area_id',
+        column_name='area_id',
+        widget=ForeignKeyWidget(Area,'area_id'))
+    
+    class Meta:
+        model = Stop_Area
+        exclude = ('id',)
+        import_id_fields = ('stop_id','area_id',)
+        use_bulk = True

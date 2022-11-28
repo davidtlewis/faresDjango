@@ -1,6 +1,4 @@
 from django.db import models
-# from django.conf import settings
-# we are branching this
 
 class Product(models.Model):
     ref_id = models.CharField(max_length=128, )
@@ -9,6 +7,14 @@ class Product(models.Model):
     currency = models.CharField(max_length=3)
     def __str__(self):
         return self.name
+
+class Stop_Area(models.Model):
+    area_id = models.ForeignKey('Area', on_delete=models.CASCADE, )
+    stop_id = models.ForeignKey('Stop', on_delete=models.CASCADE, related_name='areas',)
+    
+    def __str__(self):
+        return self.area_id.area_id + ':' + self.stop_id.stop_id
+
 
 class Leg_Rule(models.Model):
     network = models.ForeignKey('Network', on_delete=models.CASCADE, )
@@ -112,12 +118,8 @@ class Network(models.Model):
     def __str__(self):
         return self.ref_id
 
-
-
-
 class Area(models.Model):
-
-    ref_id =  models.CharField(max_length=128, blank=False, )
+    area_id =  models.CharField(max_length=128, blank=False, )
     
     def __str__(self):
-        return self.ref_id
+        return self.area_id

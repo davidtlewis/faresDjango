@@ -53,8 +53,9 @@ class LegGroupAdmin(admin.ModelAdmin):
 
 class NetworkAdmin(admin.ModelAdmin):
     # TODO need to deal wih the fact netowrks does not exost as a file - it is derived from stop_areas.txt
-    list_display = ("id", "ref_id",)
-    list_editable = ("ref_id", ) 
+    # list_display = ("id", "ref_id",)
+    # list_editable = ("ref_id", ) 
+    pass
 
 class AreaAdmin(ImportExportModelAdmin):
     list_display = ("id", "ref_id",)
@@ -67,15 +68,20 @@ class StopAdmin(ImportExportModelAdmin):
     resource_classes = [StopResource]
 
 class AreaAdmin(ImportExportModelAdmin):
-    list_display = ("ref_id", )
-    # list_editable = ("ref_id", ) 
-
-
+    list_display = ("area_id", )
+    # list_editable = ("area_id", ) 
 
 class RouteAdmin(ImportExportModelAdmin):
     list_display = ("route_id", "route_short_name","network_id")
     # list_editable = ("ref_id", ) 
     resource_classes = [RouteResource]
+
+class StopAreaAdmin(ImportExportModelAdmin):
+    list_display = ("stop_id", "area_id",)
+    # list_editable = ("ref_id", ) 
+    resource_classes = [StopAreaResource]
+
+
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Leg_Rule, LegRuleAdmin)
@@ -87,3 +93,4 @@ admin.site.register(Network, NetworkAdmin)
 admin.site.register(Stop, StopAdmin)
 admin.site.register(Route, RouteAdmin)
 admin.site.register(Area, AreaAdmin)
+admin.site.register(Stop_Area, StopAreaAdmin)
