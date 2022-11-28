@@ -14,7 +14,7 @@ class Leg_Rule(models.Model):
     network = models.ForeignKey('Network', on_delete=models.CASCADE, )
     from_area = models.ForeignKey('Area', on_delete=models.CASCADE, related_name='area_to',null=True, blank=True)
     to_area = models.ForeignKey('Area', on_delete=models.CASCADE,  related_name='area_from',null=True, blank=True)
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='leg_rules')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='leg_rules',null=True, blank=True)
     leg_group = models.ForeignKey('Leg_Group', on_delete=models.CASCADE, null=True, blank=True )
     rider_category = models.ForeignKey('Rider_Category', on_delete=models.CASCADE, null=True, blank=True)
     fare_container = models.ForeignKey('Fare_Container', on_delete=models.CASCADE,null=True, blank=True )

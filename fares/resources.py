@@ -23,10 +23,10 @@ class LegRuleResource(resources.ModelResource):
 
     fare_product_id = Field(
         attribute='product',
-        column_name='product_id',
+        column_name='fare_product_id',
         widget=ForeignKeyWidget(Product, 'ref_id'))
 
-    leg_group = Field(
+    leg_group_id = Field(
         attribute='leg_group',
         column_name='leg_group_id',
         widget=ForeignKeyWidget(Leg_Group, 'ref_id'))
@@ -40,6 +40,8 @@ class LegRuleResource(resources.ModelResource):
         attribute='fare_container',
         column_name='fare_container_id',
         widget=ForeignKeyWidget(Fare_Container, 'ref_id'))
+
+    print (fare_container_id)
 
     class Meta:
         model = Leg_Rule
