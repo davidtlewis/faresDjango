@@ -33,5 +33,14 @@ class Command(BaseCommand):
             resource.import_data(dataset, dry_run=False, raise_errors=True, file_name=import_file_name)
             import_file.close() 
 
+        import_file('routes.txt',RouteResource)
+        import_file('stops.txt',StopResource)
+        import_file('rider_categories.txt',RiderResource)
+        import_file('fare_containers.txt',FareContainerResource)
+        import_file('areas.txt',AreaResource)
+        import_file('stop_areas.txt',StopAreaResource)
         import_file('fare_products.txt',ProductResource)
         import_file('fare_leg_rules.txt',LegRuleResource)
+        import_file('fare_transfer_rules.txt',TransferRuleResource)
+
+

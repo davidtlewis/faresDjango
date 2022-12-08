@@ -16,8 +16,7 @@ from fares.filters import *
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the fares index.")
-
+    return render(request, 'fares/home.html', )
 def rider(request, rider_id):
     rider = Rider_Category.objects.get(pk=rider_id)
     leg_rules = Leg_Rule.objects.filter(rider_category = rider)

@@ -42,6 +42,13 @@ class LegRuleResource(resources.ModelResource):
         widget=ForeignKeyWidget(Fare_Container, 'ref_id'))
 
     # print (fare_container_id)
+    def before_import_row(self, row, row_number=None, **kwargs):
+        # we going to create any missing leg_group_ids
+        leg_group_id = row.get('leg_group_id')
+        if leg_group_id != '':
+            Leg_Group.objects.get_or_create(ref_id=leg_group_id)
+
+
 
     class Meta:
         model = Leg_Rule
