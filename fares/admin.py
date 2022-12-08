@@ -72,7 +72,7 @@ class AreaAdmin(ImportExportModelAdmin):
     # list_editable = ("area_id", ) 
 
 class RouteAdmin(ImportExportModelAdmin):
-    list_display = ("route_id", "route_short_name","network_id")
+    list_display = ("route_id", "route_short_name","route_long_name","network_id","as_route")
     # list_editable = ("ref_id", ) 
     resource_classes = [RouteResource]
 

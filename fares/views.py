@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django_tables2 import SingleTableView
@@ -12,7 +12,7 @@ from django.urls import reverse
 
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
 from fares.tables import *
-from fares.filters import LegRuleFilter
+from fares.filters import *
 
 
 def index(request):
@@ -69,6 +69,7 @@ class AreaListView(SingleTableView):
     model = Area
     template_name = 'fares/arealist.html'
     table_class = AreaTable
+
 class StopListView(SingleTableView):
     model = Stop
     template_name = 'fares/stoplist.html'
@@ -79,11 +80,36 @@ class RouteListView(SingleTableView):
     template_name = 'fares/routelist.html'
     table_class = RouteTable
 
+class RouteListFilteredView(SingleTableMixin, FilterView):
+    model = Route
+    table_class = RouteTable
+    filterset_class = RouteFilter
+    template_name = 'fares/routefilteredlist.html'
 
 class FareContainerListView(SingleTableView):
     model = Fare_Container
     template_name = 'fares/farecontainerlist.html'
     table_class = FareContainerTable
+
+
+class AreaStopsListView1(SingleTableView, FilterView):
+    def get_queryset(self):
+        print (self.kwargs['area_id'])
+        self.area = get_object_or_404(Area, pk=self.kwargs['area_id'])
+        print (self.area)
+        return Stop_Area.objects.filter(area_id = self.area)
+    
+    table_class = AreaStopsTable
+    # filterset_class = AreaStopsFilter
+    template_name = 'fares/areastopslist.html'
+
+
+class AreaStopsListView(SingleTableMixin, FilterView):
+    model= Stop_Area
+    table_class = AreaStopsTable
+    filterset_class = AreaStopsFilter
+    template_name = 'fares/areastopsfilteredlist.html'
+
 
 def upload_csv(request):
     data = {}

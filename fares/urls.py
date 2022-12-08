@@ -14,8 +14,11 @@ urlpatterns = [
     path("riderlist", RiderListView.as_view(), name='rider_list'),
     path("networklist", NetworkListView.as_view(), name='network_list'),
     path("productlist", ProductListView.as_view(), name='product_list'),
-    path("farecontainerlist", FareContainerListView.as_view(), name='fareconatiner_list'),
+    path("farecontainerlist", FareContainerListView.as_view(), name='farecontainer_list'),
     path('arealist', AreaListView.as_view(), name='area_list'),
     path('stoplist', StopListView.as_view(), name='stop_list'),
     path('routelist', RouteListView.as_view(), name='route_list'),
+    path("routelistfiltered", RouteListFilteredView.as_view(), name='route_filtered_list'),
+    path("areastopslist1/<int:area_id>", AreaStopsListView.as_view(), name='sopts_of_area'),
+    path("areastopslist", AreaStopsListView.as_view(), name='area_stops_filtered_list'),
 ]

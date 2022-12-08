@@ -37,6 +37,13 @@ class AreaTable(tables.Table):
         model = Area
         template_name = "django_tables2/bootstrap.html"
 
+class AreaStopsTable(tables.Table):
+    stop_name = tables.Column(accessor='stop_id.stop_name')
+    location_type = tables.Column(accessor='stop_id.location_type')
+    class Meta:
+        model = Stop_Area
+        template_name = "django_tables2/bootstrap.html"
+
 class StopTable(tables.Table):
     class Meta:
         model = Stop

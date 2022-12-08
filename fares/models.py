@@ -15,7 +15,6 @@ class Stop_Area(models.Model):
     def __str__(self):
         return self.area_id.area_id + ':' + self.stop_id.stop_id
 
-
 class Leg_Rule(models.Model):
     network = models.ForeignKey('Network', on_delete=models.CASCADE, )
     from_area = models.ForeignKey('Area', on_delete=models.CASCADE, related_name='area_to',null=True, blank=True)
@@ -24,7 +23,6 @@ class Leg_Rule(models.Model):
     leg_group = models.ForeignKey('Leg_Group', on_delete=models.CASCADE, null=True, blank=True )
     rider_category = models.ForeignKey('Rider_Category', on_delete=models.CASCADE, null=True, blank=True)
     fare_container = models.ForeignKey('Fare_Container', on_delete=models.CASCADE,null=True, blank=True )
-
 
 class Stop(models.Model):
     # stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,wheelchair_boarding,location_type,parent_station
@@ -49,8 +47,21 @@ class Stop(models.Model):
 
 class Route(models.Model):
     route_id = models.CharField(max_length=128, )
-    route_short_name = models.CharField(max_length=128)
+    route_short_name = models.CharField(max_length=128,blank=True , null=True)
+    route_long_name = models.CharField(max_length=128,blank=True , null=True)
     network_id  = models.ForeignKey('Network', on_delete=models.CASCADE, blank=True , null=True)
+
+    class AsRouteType(models.TextChoices):
+        NO = '0', 'No'
+        YES = '1', 'Yes'
+        
+    as_route = models.CharField(
+        max_length=1,
+        choices=AsRouteType.choices,
+        default=None,
+        blank=True,
+        null=True
+    )
     
     def __str__(self):
         return self.route_short_name
