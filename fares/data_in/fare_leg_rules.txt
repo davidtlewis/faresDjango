@@ -1,0 +1,15 @@
+leg_group_id,network_id,from_area_id,to_area_id,is_symmetrical,fare_product_id,rider_category_id,fare_container_id,service_id,from_timeframe_id,notes
+LOrBus:PAYG:VentraCard:adult,L,not_airport,anywhere,0,L:PAYG:VentraCard:adult,adult,VentraCard,,,
+LOrBus:PAYG:Contactless:adult,L,not_airport,anywhere,0,L:PAYG:Contactless:adult,adult,Contactless,,,
+LOrBus:PAYG:VentraCard:adult,L,airport,anywhere,0,Airport:PAYG:VentraCard:adult,adult,VentraCard,,,
+LOrBus:PAYG:Contactless:adult,L,airport,anywhere,0,Airport:PAYG:Contactless:adult,adult,Contactless,,,
+LOrBus:PAYG:VentraCard:adult,Bus,anywhere,anywhere,0,Bus:PAYG:VentraCard:adult,adult,VentraCard,,,
+LOrBus:PAYG:Contactless:adult,Bus,anywhere,anywhere,0,Bus:PAYG:Contactless:adult,adult,Contactless,,,
+Bus:PAYG:Cash:adult,Bus,anywhere,anywhere,0,Bus:PAYG:Cash:adult,adult,,,,
+LOrBus:PAYG:VentraTicket:adult,L,not_airport,anywhere,0,L:PAYG:VentraTicket:adult,adult,VentraTicket,,,
+LOrBus:PAYG:VentraTicket:adult,L,airport,anywhere,0,Airport:PAYG:VentraTicket:adult,adult,VentraTicket,,,
+LOrBus:PAYG:VentraTicket:adult,Bus,anywhere,anywhere,0,Bus:PAYG:VentraTicket:adult,adult,VentraTicket,,,
+LOrBus:PAYG:ReducedPermit:seniorDisabled,L,not_airport,anywhere,0,L:PAYG:ReducedPermit:seniorDisabled,seniorDisabled,ReducedPermit,,,
+LOrBus:PAYG:ReducedPermit:seniorDisabled,L,airport,anywhere,0,Airport:PAYG:ReducedPermit:seniorDisabled,seniorDisabled,ReducedPermit,,,
+LOrBus:PAYG:ReducedPermit:seniorDisabled,Bus,anywhere,anywhere,0,Bus:PAYG:ReducedPermit:seniorDisabled,seniorDisabled,ReducedPermit,,,
+Bus:PAYG:Cash:seniorDisabled,Bus,anywhere,anywhere,0,Bus:PAYG:Cash:seniorDisabled,seniorDisabled,,,,Note Reduced Permit required only for proof of eligibility not value store

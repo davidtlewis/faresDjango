@@ -1,0 +1,19 @@
+fare_product_id,fare_product_name,amount,currency,notes
+L:PAYG:Contactless:adult,Contactless Regular L train,2.50,USD,using contactless card or mobile
+Bus:PAYG:Contactless:adult,Contactless Regular Bus,2.25,USD,using contactless card or mobile
+Airport:PAYG:Contactless:adult,Contactless O'Hare L train,5.00,USD,using contactless card or mobile at O'Hare
+L:PAYG:VentraCard:adult,VentraCard Regular L train,2.50,USD,Using pre charged VentraCard
+Bus:PAYG:VentraCard:adult,VentraCard Regular Bus,2.25,USD,Using pre charged VentraCard
+Airport:PAYG:VentraCard:adult,VentraCard O'Hare L train,5.00,USD,Ventra Card at O'Hare
+Bus:PAYG:Cash:adult,Cash Regular Bus,2.50,USD,Cash when boarding bus
+L:PAYG:VentraTicket:adult,VentraTicket Single-Ride Ticket,3.00,USD,CTA Single-Ride Ventra Ticket
+Bus:PAYG:VentraTicket:adult,VentraTicket Single-Ride Ticket,3.00,USD,CTA Single-Ride Ventra Ticket at Ventra vending machine - duplicated of Bus to allow transfer sequences (may not be needed)
+Airport:PAYG:VentraTicket:adult,VentraTicket Single-Ride Ticket,5.00,USD,CTA Single-Ride Ventra Ticket at O'Hare
+transfer:PAYG:VentraCard:adult,Free Transfer,0.00,USD,Free Transfer with VentraCard / Contactless PAYG Regular Fares
+transfer:PAYG:Contactless:adult,Free Transfer,0.00,USD,Free Transfer with VentraCard / Contactless PAYG Regular Fares
+transfer:PAYG:VentraTicket:adult,Free Transfer,0.00,USD,Free Transfer with Single Ride Ventra Ticket
+L:PAYG:ReducedPermit:seniorDisabled,Reduced Permit Regular L train,1.25,USD,Reduced Permit on L
+Bus:PAYG:ReducedPermit:seniorDisabled,Reduced Permit Regular Bus,1.10,USD,Reduced Permit on Bus
+Airport:PAYG:ReducedPermit:seniorDisabled,Reduced Permit O'Hare L train,1.25,USD,Reduced Permit at L O'Hare
+transfer:PAYG:ReducedPermit:seniorDisabled,Free Transfer,0.00,USD,Free Transfer with Reduced Permit PAYG Regular Fares
+Bus:PAYG:Cash:seniorDisabled,Reduced Permit Cash Regular Bus,1.25,USD,Cash when boarding bus showing Reduced Permit

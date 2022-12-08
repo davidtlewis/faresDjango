@@ -1,0 +1,6 @@
+rider_category_id,rider_category_name,min_age,max_age,eligibility_url,notes
+adult,adult,,,,
+child,child,,,https://www.transitchicago.com/reduced-fare-programs/,not implemented
+student,student,,,https://www.transitchicago.com/reduced-fare-programs/,not implemented - requires term dates
+seniorDisabled,65+,65,,https://www.transitchicago.com/reduced-fare-programs/,
+seniorDisabled,disability,,,https://www.transitchicago.com/reduced-fare-programs/,

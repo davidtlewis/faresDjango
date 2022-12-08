@@ -1,0 +1,4 @@
+area_id
+anywhere
+airport
+not_airport

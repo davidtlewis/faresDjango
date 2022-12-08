@@ -1,0 +1,6 @@
+fare_container_id,fare_container_name,amount,currency,rider_category_id,notes
+VentraCard,Ventra Card,5,USD,,Pre Pay Card
+Contactless,Contactless,0,USD,,COntactless Bank Card
+VentraTicket,Ventra Ticket,0,USD,,Single Use Ticket
+StudentVentraCard,Student Ventra Card,5,USD,student,Student Pre Pay Card - not used
+ReducedPermit,RTA Reduced Fare Permit,0,USD,seniorDisabled,
