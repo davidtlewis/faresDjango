@@ -67,6 +67,13 @@ class ProductResource(resources.ModelResource):
         import_id_fields = ('ref_id',)
 
 
+class CalendarResource(resources.ModelResource):
+
+    class Meta:
+        model = Calendar
+        import_id_fields = ('service_id',)
+
+
 class RiderResource(resources.ModelResource):
     ref_id = Field(attribute='ref_id', column_name='rider_category_id')
     name = Field(attribute='name', column_name='rider_category_name')

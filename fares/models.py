@@ -165,3 +165,21 @@ class Area(models.Model):
 
     def __str__(self):
         return self.area_id
+
+
+class Calendar(models.Model):
+    # service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+    service_id = models.CharField(max_length=128,)
+    monday = models.BooleanField(null=True, blank=True)
+    tuesday = models.BooleanField(null=True, blank=True)
+    wednesday = models.BooleanField(null=True, blank=True)
+    thursday = models.BooleanField(null=True, blank=True)
+    friday = models.BooleanField(null=True, blank=True)
+    saturday = models.BooleanField(null=True, blank=True)
+    sunday = models.BooleanField(null=True, blank=True)
+    monday = models.BooleanField(null=True, blank=True)
+    start_date = models.CharField(max_length=8, null=True, blank=True)
+    end_date = models.CharField(max_length=8, null=True, blank=True)
+
+    def __str__(self):
+        return self.service_id
