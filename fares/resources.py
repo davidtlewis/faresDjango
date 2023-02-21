@@ -42,6 +42,11 @@ class LegRuleResource(resources.ModelResource):
         column_name='fare_container_id',
         widget=ForeignKeyWidget(Fare_Container, 'ref_id'))
 
+    service_id = Field(
+        attribute='service_id',
+        column_name='service_id',
+        widget=ForeignKeyWidget(Calendar, 'service_id'))
+
     # print (fare_container_id)
     def before_import_row(self, row, row_number=None, **kwargs):
         # we going to create any missing leg_group_ids
@@ -54,7 +59,7 @@ class LegRuleResource(resources.ModelResource):
         exclude = ('id', 'from_area', 'to_area', 'network', 'product',
                    'rider_category', 'leg_group', 'fare_container')
         import_id_fields = ('network_id', 'from_area_id', 'to_area_id',
-                            'rider_category_id', 'fare_container_id')
+                            'rider_category_id', 'fare_container_id', 'service_id')
 
 
 class ProductResource(resources.ModelResource):

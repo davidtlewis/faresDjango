@@ -34,6 +34,8 @@ class Leg_Rule(models.Model):
         'Rider_Category', on_delete=models.CASCADE, null=True, blank=True)
     fare_container = models.ForeignKey(
         'Fare_Container', on_delete=models.CASCADE, null=True, blank=True)
+    service_id = models.ForeignKey(
+        'Calendar', on_delete=models.CASCADE, null=True, blank=True)
     amount = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
 

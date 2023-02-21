@@ -5,14 +5,16 @@ from .models import *
 
 
 class LegRuleTable(tables.Table):
-    productName = tables.Column(accessor='product.name')
-    productAmount = tables.Column(accessor='product.amount')
+    productName = tables.Column(
+        accessor='product.name', verbose_name='Prod Name')
+    productAmount = tables.Column(
+        accessor='product.amount', verbose_name='Prod Amount')
 
     class Meta:
         model = Leg_Rule
         template_name = "django_tables2/bootstrap.html"
         fields = ("id", "network", "from_area", "to_area", "rider_category",
-                  "fare_container", "amount", "leg_group", "productName", "productAmount")
+                  "fare_container", "service_id", "amount", "leg_group", "productName", "productAmount")
 
 
 class RiderTable(tables.Table):
