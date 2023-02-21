@@ -7,7 +7,7 @@ from import_export.formats import base_formats
 import os
 from faresDjango.settings import BASE_DIR
 from import_export.admin import ImportMixin
-
+ 
 
 FORMATS = {
     'text/csv': base_formats.CSV,
@@ -19,7 +19,6 @@ class Command(BaseCommand):
     data_dir =  os.path.join(BASE_DIR, 'fares/data_in/')
     
     def handle(self, *args, **kwargs):
-        
    
         def import_file(import_file_name, ResourceClass):
             data_dir =  os.path.join(BASE_DIR, 'fares/data_in/')
