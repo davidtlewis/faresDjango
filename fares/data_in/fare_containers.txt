@@ -1,6 +1,4 @@
-fare_container_id,fare_container_name,amount,currency,rider_category_id,notes
-VentraCard,Ventra Card,5,USD,,Pre Pay Card
-Contactless,Contactless,0,USD,,COntactless Bank Card
-VentraTicket,Ventra Ticket,0,USD,,Single Use Ticket
-StudentVentraCard,Student Ventra Card,5,USD,student,Student Pre Pay Card - not used
-ReducedPermit,RTA Reduced Fare Permit,0,USD,seniorDisabled,
+fare_container_id,fare_container_name,amount,currency
+tfl_oyster,Oyster,5.00,GBP
+tfl_contactless,Contactless,,
+tfl_zip_oyster,Zip Oyster,15.00,GBP

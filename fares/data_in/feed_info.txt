@@ -1,2 +1,2 @@
 feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version
-ITO World,http://www.itoworld.com/,EN,20221114,20230131,20221122_054840
+ITO World,http://www.itoworld.com/,EN,20230211,20231110,20230219_140927

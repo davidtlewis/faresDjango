@@ -1,2 +1,40 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url
-OP1,"Chicago Transit Authority","http://transitchicago.com",America/Chicago,EN,"1-888-YOURCTA","http://www.transitchicago.com/travel_information/fares/default.aspx"
+agency_id,agency_name,agency_url,agency_timezone,agency_lang
+OP6886,"national express","https://www.nationalexpress.com/en",Europe/London,EN
+OP13519,"FlixBus","https://www.flixbus.co.uk/",Europe/London,EN
+OP771,"Megabus (booking required)","http://uk.megabus.com/",Europe/London,EN
+OP13750,"Airport Bus Express","https://www.traveline.info",Europe/London,EN
+OP13521,"New Bharat Coaches","https://www.newbharat.co.uk",Europe/London,EN
+OP56,"South Beds Dial-a-Ride","https://www.traveline.info",Europe/London,EN
+OP633,"Brookline","http://www.brooklinecoaches.co.uk",Europe/London,EN
+OP644,"Centaur Travel","https://www.centaurtravel.co.uk/",Europe/London,EN
+OP645,"Edward Thomas","https://www.traveline.info",Europe/London,EN
+OP641,"Redwing Coaches","https://www.traveline.info",Europe/London,EN
+OP1067,"Berrys Coaches","http://www.berryscoaches.co.uk",Europe/London,EN
+OP1169,"Transport for London","https://tfl.gov.uk/modes/tube/",Europe/London,EN
+OP551,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1170,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP612,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1172,"Docklands Light Railway","https://tfl.gov.uk/modes/dlr/",Europe/London,EN
+OP11440,"Thames River Services","https://www.traveline.info",Europe/London,EN
+OP1177,"City Cruises","http://www.citycruises.com",Europe/London,EN
+OP1178,"Uber Boat by Thames Clippers","http://www.thamesclippers.com/",Europe/London,EN
+OP1179,"Transport for London","https://tfl.gov.uk/modes/river/woolwich-ferry",Europe/London,EN
+OP1182,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP12034,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP12035,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP14575,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1914,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1915,"Transport for London","https://tfl.gov.uk/",Europe/London,EN
+OP1185,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP42,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1916,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1189,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1264,"Transport for London","https://tfl.gov.uk/",Europe/London,EN
+OP1188,"Transport for London","https://tfl.gov.uk/modes/trams/",Europe/London,EN
+OP11442,"IFS Cloud Cable Car","https://tfl.gov.uk/modes/london-cable-car/",Europe/London,EN
+OP11180,"Transport for London","https://tfl.gov.uk/",Europe/London,EN
+OP566,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1920,"Transport for London","https://tfl.gov.uk",Europe/London,EN
+OP1921,"Transport for London","https://tfl.gov.uk/",Europe/London,EN
+OP1197,"Transport for London","https://tfl.gov.uk/",Europe/London,EN
+OP17776,"Replacement Service","https://www.traveline.info",Europe/London,EN

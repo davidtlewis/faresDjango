@@ -1,1 +1,13 @@
 timeframe_id,start_time,end_time
+tfl_tube_peak,06:30:00,09:30:00
+tfl_tube_peak,16:00:00,19:00:00
+tfl_tube_am_peak,06:30:00,09:30:00
+tfl_tube_pm_peak,16:00:00,19:00:00
+tfl_tube_off_peak,00:00:00,06:30:00
+tfl_tube_off_peak,09:30:00,16:00:00
+tfl_tube_off_peak,19:00:00,30:00:00
+tfl_tube_not_am_peak,00:00:00,06:30:00
+tfl_tube_not_am_peak,09:30:00,30:00:00
+tfl_tube_not_pm_peak,00:00:00,16:00:00
+tfl_tube_not_pm_peak,19:00:00,30:00:00
+anytime,00:00:00,30:00:00
