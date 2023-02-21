@@ -1,0 +1,5 @@
+django-filter
+django-tables2
+django-bootstrap4
+django-import-export
+django-extensions

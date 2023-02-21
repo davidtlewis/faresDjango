@@ -6,3 +6,6 @@ myvenv
 /static
 .DS_Store
 /.env
+/fares/data_in
+db.sqlite3
+
