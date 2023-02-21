@@ -1,4 +1,0 @@
-fare_container_id,fare_container_name,amount,currency
-tfl_oyster,Oyster,5.00,GBP
-tfl_contactless,Contactless,,
-tfl_zip_oyster,Zip Oyster,15.00,GBP

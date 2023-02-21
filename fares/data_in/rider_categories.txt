@@ -1,4 +1,0 @@
-rider_category_id,rider_category_name,min_age,max_age
-tfl_adult,Adult,18,
-tfl_child_0_10,Child 0-10,0,10
-tfl_child,Child 11-17,11,17
