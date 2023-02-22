@@ -9,7 +9,6 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 
-
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
 from fares.tables import *
 from fares.filters import *
@@ -17,17 +16,20 @@ from fares.filters import *
 
 def index(request):
     return render(request, 'fares/home.html', )
+
+
 def rider(request, rider_id):
     rider = Rider_Category.objects.get(pk=rider_id)
-    leg_rules = Leg_Rule.objects.filter(rider_category = rider)
+    leg_rules = Leg_Rule.objects.filter(rider_category=rider)
     # total = a.aggregate(Sum('account_value'))
-    # pensions = Account.objects.filter(account_type = "pension") 
-    #a = Account.objects.filter(person__name = "david").exclude(account_type = "pension") | Account.objects.filter(person__name = "henri").exclude(account_type = "pension")
+    # pensions = Account.objects.filter(account_type = "pension")
+    # a = Account.objects.filter(person__name = "david").exclude(account_type = "pension") | Account.objects.filter(person__name = "henri").exclude(account_type = "pension")
     # accounts_by_type = a.values('account_type').annotate(total_value=Sum('account_value'))
     # stock_currencies = Stock.objects.filter(stock_type = "curr")
     return render(request, 'fares/rider.html', {
-    'rider': rider, 'leg_rules':leg_rules, 
+        'rider': rider, 'leg_rules': leg_rules,
     }, )
+
 
 class LegRuleListView(SingleTableView):
     model = Leg_Rule
@@ -38,52 +40,68 @@ class LegRuleListView(SingleTableView):
     #     queryset = super(PostListView, self).get_queryset()
     #     return queryset.filter(author.username=self.request.user.username)
 
+
 class TransferListView(SingleTableView):
     model = Transfer_Rule
     template_name = 'fares/transferlist.html'
     table_class = TransferTable
+
 
 class LegRuleListFilteredView(SingleTableMixin, FilterView):
     model = Leg_Rule
     table_class = LegRuleTable
     filterset_class = LegRuleFilter
     template_name = 'fares/legrulefilteredlist.html'
-    
+
+
 class RiderListView(SingleTableView):
     model = Rider_Category
     template_name = 'fares/riderlist.html'
     table_class = RiderTable
+
 
 class NetworkListView(SingleTableView):
     model = Network
     template_name = 'fares/networklist.html'
     table_class = NetworkTable
 
+
 class ProductListView(SingleTableView):
     model = Product
     template_name = 'fares/productlist.html'
     table_class = ProductTable
+
 
 class AreaListView(SingleTableView):
     model = Area
     template_name = 'fares/arealist.html'
     table_class = AreaTable
 
+
 class StopListView(SingleTableView):
     model = Stop
     template_name = 'fares/stoplist.html'
     table_class = StopTable
+
 
 class RouteListView(SingleTableView):
     model = Route
     template_name = 'fares/routelist.html'
     table_class = RouteTable
 
+
+class CalendarListView(SingleTableView):
+    model = Calendar
+    template_name = 'fares/calendarlist.html'
+    table_class = CalendarTable
+
+
 class RouteListFilteredView(SingleTableMixin, FilterView):
     model = Route
     table_class = RouteTable
     filterset_class = RouteFilter
     template_name = 'fares/routefilteredlist.html'
+
 
 class FareContainerListView(SingleTableView):
     model = Fare_Container
@@ -93,18 +111,18 @@ class FareContainerListView(SingleTableView):
 
 class AreaStopsListView1(SingleTableView, FilterView):
     def get_queryset(self):
-        print (self.kwargs['area_id'])
+        print(self.kwargs['area_id'])
         self.area = get_object_or_404(Area, pk=self.kwargs['area_id'])
-        print (self.area)
-        return Stop_Area.objects.filter(area_id = self.area)
-    
+        print(self.area)
+        return Stop_Area.objects.filter(area_id=self.area)
+
     table_class = AreaStopsTable
     # filterset_class = AreaStopsFilter
     template_name = 'fares/areastopslist.html'
 
 
 class AreaStopsListView(SingleTableMixin, FilterView):
-    model= Stop_Area
+    model = Stop_Area
     table_class = AreaStopsTable
     filterset_class = AreaStopsFilter
     template_name = 'fares/areastopsfilteredlist.html'
@@ -116,10 +134,11 @@ def upload_csv(request):
         return render(request, "fares/uploadlegrules.html", data)
     # if not GET, then proceed
     csv_file = request.FILES["csv_file"]
-    
-    #if file is too large, return
+
+    # if file is too large, return
     if csv_file.multiple_chunks():
-        messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+        messages.error(request, "Uploaded file is too big (%.2f MB)." %
+                       (csv_file.size/(1000*1000),))
         return HttpResponseRedirect(reverse("uploadlegrules"))
 
     decoded_file = csv_file.read().decode('utf-8').splitlines()
@@ -130,69 +149,72 @@ def upload_csv(request):
     resultsMessage = ''
     for row in file_data:
         # create a fare_lef_rule for each row - as long as all referenced objects exists
-        row_counter+=1
+        row_counter += 1
         # print(row)
-        
+
         network = Network.objects.filter(ref_id=row['network_id']).first()
         from_area = Area.objects.filter(ref_id=row['from_area_id']).first()
         to_area = Area.objects.filter(ref_id=row['to_area_id']).first()
         product = Product.objects.filter(ref_id=row['fare_product_id']).first()
-        rider_category = Rider_Category.objects.filter(ref_id=row['rider_category_id']).first()
-        fare_container = Fare_Container.objects.filter(ref_id=row['fare_container_id']).first()
+        rider_category = Rider_Category.objects.filter(
+            ref_id=row['rider_category_id']).first()
+        fare_container = Fare_Container.objects.filter(
+            ref_id=row['fare_container_id']).first()
         if row['leg_group_id'] != '':
-            leg_group, created = Leg_Group.objects.get_or_create(ref_id=row['leg_group_id'])
+            leg_group, created = Leg_Group.objects.get_or_create(
+                ref_id=row['leg_group_id'])
         else:
             leg_group = None
 
         rowValid = True
         resultsMessage += f"Row: {row_counter} "
         # check all references worked - record error message if not
-        if (row['network_id'] != '') and (network is None) :
+        if (row['network_id'] != '') and (network is None):
             rowValid = False
             resultsMessage += f"fare_product: {row['network_id']} not found. "
 
-        if (row['from_area_id'] != '') and (from_area is None) :
+        if (row['from_area_id'] != '') and (from_area is None):
             rowValid = False
             resultsMessage += f"fare_product: {row['from_area_id']} not found. "
 
-        if (row['to_area_id'] != '') and (to_area is None) :
+        if (row['to_area_id'] != '') and (to_area is None):
             rowValid = False
             resultsMessage += f"fare_product: {row['to_area_id']} not found. "
-        
-        if (row['fare_product_id'] != '') and (product is None) :
+
+        if (row['fare_product_id'] != '') and (product is None):
             rowValid = False
             resultsMessage += f"fare_product: {row['fare_product_id']} not found. "
 
-        if (row['rider_category_id'] != '') and (rider_category is None) :
+        if (row['rider_category_id'] != '') and (rider_category is None):
             rowValid = False
             resultsMessage += f"rider_category: {row['rider_category_id']} not found. "
 
-        if (row['fare_container_id'] != '') and (fare_container is None) :
+        if (row['fare_container_id'] != '') and (fare_container is None):
             rowValid = False
             resultsMessage += f"fare_container: {row['fare_container_id']} not found."
-        
+
         if rowValid == False:
-            erroredRows+=1
-            #close out the message string
-            resultsMessage+='\n'
+            erroredRows += 1
+            # close out the message string
+            resultsMessage += '\n'
         else:
-            #create the leg rule object
+            # create the leg rule object
             lg = Leg_Rule(
                 network=network,
-                from_area=from_area, 
-                to_area=to_area, 
+                from_area=from_area,
+                to_area=to_area,
                 product=product,
                 leg_group=leg_group,
                 rider_category=rider_category,
                 fare_container=fare_container,
             )
             lg.save()
-            createdObjects+=1
+            createdObjects += 1
             resultsMessage += "Leg Rule created.\n"
-        
+
     print(resultsMessage)
     print(f'created {createdObjects} objects')
     print(f'Errored Rows {erroredRows}')
 
-        #TODO fix up response to provide the error and status message via a message in context
+    # TODO fix up response to provide the error and status message via a message in context
     return HttpResponseRedirect(reverse("uploadlegrules"))
