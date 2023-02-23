@@ -1,0 +1,10 @@
+{% extends "fares/layout.html" %}
+{% load render_table from django_tables2 %}
+
+
+{% block body %}
+    <h2>Table 1 </h2>
+    {% render_table tables.0 %}
+    <h2>Table 2 </h2>
+    {% render_table tables.1 %}
+{% endblock %}

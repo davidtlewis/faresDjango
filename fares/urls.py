@@ -27,4 +27,6 @@ urlpatterns = [
          AreaStopsListView.as_view(), name='sopts_of_area'),
     path("areastopslist", AreaStopsListView.as_view(),
          name='area_stops_filtered_list'),
+    path("testdoubletable", testdoubletable.as_view(),
+         name='testdoubletable'),
 ]

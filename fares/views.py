@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django_tables2 import SingleTableView
+from django_tables2 import MultiTableMixin
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 import csv
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.generic.base import TemplateView
 
 
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
@@ -218,3 +220,19 @@ def upload_csv(request):
 
     # TODO fix up response to provide the error and status message via a message in context
     return HttpResponseRedirect(reverse("uploadlegrules"))
+
+
+class testdoubletable(MultiTableMixin, TemplateView):
+    template_name = 'fares/testdoubletable.html'
+    # both apprqaoches below work - the later allows addition of prefix
+    tables = [CalendarTable(Calendar.objects.all()),
+              ProductTable(Product.objects.all())]
+
+    # def get_tables(self):
+    #     calendars = Calendar.objects.all()
+    #     products = Product.objects.all()
+    #     self.tables = [
+    #         CalendarTable(calendars, prefix='1-'),
+    #         ProductTable(products, prefix='2-')
+    #     ]
+    #     return super().get_tables()
