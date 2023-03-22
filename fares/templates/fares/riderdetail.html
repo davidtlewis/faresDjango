@@ -1,0 +1,22 @@
+{% extends "fares/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2>Rider {{object.name}}</h2>
+
+<table>
+    <tr>
+        <td>Min Age</td><td>{{object.min_age}}</td>
+    </tr>
+    <tr>
+        <td>Max Age</td><td>{{object.max_age}}</td>
+    </tr>
+    <tr>
+            <td>Eligibility</td><td>{{object.eligibility_url}}</td>
+        </tr>
+        <tr>
+            <td>Notes</td><td>{{object.nogtes}}</td>
+    </tr>
+</table>    
+
+{% endblock %}

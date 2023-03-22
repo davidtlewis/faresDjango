@@ -9,6 +9,7 @@ import csv
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 
 
 from fares.models import Leg_Rule, Rider_Category, Transfer_Rule
@@ -236,3 +237,8 @@ class testdoubletable(MultiTableMixin, TemplateView):
     #         ProductTable(products, prefix='2-')
     #     ]
     #     return super().get_tables()
+
+
+class RiderDetailView(DetailView):
+    model = Rider_Category
+    template_name = "fares/riderdetail.html"

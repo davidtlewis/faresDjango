@@ -6,7 +6,7 @@ from fares.views import *
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('rider/<int:rider_id>', views.rider, name='rider_detail'),
+    #     path('rider/<int:rider_id>', views.rider, name='rider_detail'),
     path("legrulelist", LegRuleListView.as_view(), name='legrule_list'),
     path("transferlist", TransferListView.as_view(), name='transfer_list'),
     path("legrulelistfiltered", LegRuleListFilteredView.as_view(),
@@ -29,4 +29,5 @@ urlpatterns = [
          name='area_stops_filtered_list'),
     path("testdoubletable", testdoubletable.as_view(),
          name='testdoubletable'),
+    path('rider/<int:pk>', RiderDetailView.as_view(), name='rider_detail'),
 ]
